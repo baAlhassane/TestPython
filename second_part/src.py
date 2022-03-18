@@ -1,4 +1,4 @@
-
+from random import randint
 i=0;
 def random_gen():
     global i
@@ -11,21 +11,34 @@ def random_gen():
         print(" it generate 15 in  {} times ".format(i))
         return i ;
 
-
 def decorator_to_str(func):
     # todo exercise 2
-    return str(func)
+    def decorateur(*args,**kwargs):
+        print(f"Début d'appel à {func.__name__}")
+        #if(len(args)>1):
+        resultat = func(*args,**kwargs)
+        return str(resultat)
+    return decorateur
 
 
 @decorator_to_str
 def add(a, b):
     return (a + b)
-
-
+    
 @decorator_to_str
 def get_info(d):
-    return d['info']
+  l=[]
+  for k,v in d.items():
+    l.append(v)
+    
+  return l[0]
 
+
+a=add(1,2)   
+print(type(a))
+
+b=get_info({'info': [1, 2, 3]})
+print((b))
 
 def ignore_exception(exception):
     # todo exercise 3
